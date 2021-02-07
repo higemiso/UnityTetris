@@ -29,7 +29,7 @@ public class Mino : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.position += new Vector3(-1, 0, 0);
-            // 今回追加
+
             if (!ValidMovement())
             {
                 transform.position -= new Vector3(-1, 0, 0);
@@ -142,6 +142,13 @@ public class Mino : MonoBehaviour
             int roundY = Mathf.RoundToInt(children.transform.position.y);
 
             grid[roundX, roundY] = children;
+
+            if(roundY >= height - 1)//height-1 = 19の高さまでブロックが来たらGameOver
+            //if (roundY >= height)//height = 20に変更したら変な現象が起きた
+            {
+                //GameOverメソッドを呼び出す
+                FindObjectOfType<GameManagement>().GameOver();
+            }
         }
     }
 
